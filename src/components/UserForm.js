@@ -21,43 +21,22 @@ export class UserForm extends Component {
     this.state = {
       name: '',
       email: '',
-      message: 'What would you like to say.',
+      message: '',
       validEmail: false,
       isSuccess: false
     };
   }
   
-  onChange = (e) => {
-    console.log('onChange ran');
+  handleChange = (field, value) => {
+    this.setState({ [field]: value })
   }
 
-  validateEmail = (e) => {
-    console.log('onBlur email Ran')
-    const email = e.target.value;
-    if (!email) {
-      this.setState({
-        validEmail: true,
-      });
-    } else {
-      this.setState({
-        validEmail: false,
-      });
-    }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    
+    console.log('handleSubmit function');
   }
 
-  validateMessage = e => {
-      console.log('onBlur message Ran');
-      const message = e.target.value;
-      if (!message) {
-        this.setState({
-            message: 'Please enter a message',
-        });
-      } else {
-        this.setState({
-            message: 'What would you like to say.',
-        });
-      }
-  }
 
   render() {
     const { validEmail, message } = this.state;
@@ -78,9 +57,10 @@ export class UserForm extends Component {
             justify="center"
             style={{ minHeight: '50vh' }}>
           <FormGroup style={styles.formGroup}>
+            <form onSubmit={this.handleSubmit} style={{ display: 'flex', flexDirection: 'column'} }>
             <FormControl margin="normal">
               <InputLabel htmlFor="my-input">Name</InputLabel>
-              <Input id="my-input" aria-describedby="my-helper-text" />
+              <Input id="my-input" aria-describedby="my-helper-text" required onChange={(e) => this.handleChange('name', e.target.value)} />
               <FormHelperText id="my-helper-text">
                 Please enter your name.
               </FormHelperText>
@@ -90,9 +70,11 @@ export class UserForm extends Component {
               <Input 
                 id="my-input" 
                 aria-describedby="my-helper-text" 
+                required
+                onChange={(e) => this.handleChange('email', e.target.value)}
                 />
               <FormHelperText id="my-helper-text">
-                {validEmail ? 'Please enter a valid Email' : "We'll never share your email."}
+                { "We'll never share your email." }
               </FormHelperText>
             </FormControl>
             <FormControl margin="normal">
@@ -100,16 +82,22 @@ export class UserForm extends Component {
               <Input 
                 id="my-input" 
                 aria-describedby="my-helper-text"
-                onBlur={this.validateMessage}
-                onChange={this.onChange} 
+                onChange={(e) => this.handleChange('message', e.target.value)} 
+                required
                 />
               <FormHelperText id="my-helper-text">
-                {message}
+                {'What would you like to say'}
               </FormHelperText>
             </FormControl>
             <FormControl margin="normal">
-              <Button>Submit</Button>
+              <Button 
+                type="submit"
+                fullWidth
+                color="primary"
+                className="submit-btn"
+              >Submit</Button>
             </FormControl>
+            </form>
           </FormGroup>         
         </Grid>
       </Fragment>
