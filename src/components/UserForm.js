@@ -10,9 +10,10 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
   formGroup: {
-    backgroundColor: '#fbfbfb',
-    boxShadow: '0 2px 2px #ccc',
     padding: '2rem'
+  },
+  headerStyles: {
+    padding: '0 2rem'
   }
 };
 export class UserForm extends Component {
@@ -32,14 +33,13 @@ export class UserForm extends Component {
   }
 
   handleSubmit = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     
     console.log('handleSubmit function');
   }
 
 
   render() {
-    const { validEmail, message } = this.state;
     return (
       <Fragment>
           <Grid 
@@ -48,7 +48,7 @@ export class UserForm extends Component {
             direction="column"
             justify="center"
             style={{ minHeight: '20vh' }}>
-              <h4>Amazon AWS S3 trigger Lambda Function</h4>
+              <h2 style={ styles.headerStyles }>Reactjs application with Material UI on Amazon AWS S3 to trigger Lambda Function</h2>
           </Grid>
         <Grid
             container
@@ -57,7 +57,7 @@ export class UserForm extends Component {
             justify="center"
             style={{ minHeight: '50vh' }}>
           <FormGroup style={styles.formGroup}>
-            <form onSubmit={this.handleSubmit} style={{ display: 'flex', flexDirection: 'column'} }>
+            <form action="/submit" onSubmit={this.handleSubmit} style={{ display: 'flex', flexDirection: 'column'} }>
             <FormControl margin="normal">
               <InputLabel htmlFor="my-input">Name</InputLabel>
               <Input id="my-input" aria-describedby="my-helper-text" required onChange={(e) => this.handleChange('name', e.target.value)} />
@@ -67,7 +67,8 @@ export class UserForm extends Component {
             </FormControl>
             <FormControl margin="normal">
               <InputLabel htmlFor="my-input">Email address</InputLabel>
-              <Input 
+              <Input
+                type="email"
                 id="my-input" 
                 aria-describedby="my-helper-text" 
                 required
