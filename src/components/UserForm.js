@@ -7,6 +7,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
 import { Grid } from "@material-ui/core";
 import { withStyles } from '@material-ui/core/styles';
+import config from '../config.json';
+import axios from 'axios';
 
 const styles = {
   formGroup: {
@@ -23,8 +25,7 @@ export class UserForm extends Component {
       name: '',
       email: '',
       message: '',
-      validEmail: false,
-      isSuccess: false
+      data: {}
     };
   }
   
@@ -32,10 +33,17 @@ export class UserForm extends Component {
     this.setState({ [field]: value })
   }
 
-  handleSubmit = (e) => {
-    // e.preventDefault();
-    
-    console.log('handleSubmit function');
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    const { message, name, email } = this.state;
+    await axios.post(`${ config.api.invokeUrl }/submit`, 
+    { message: `${ message }`,
+      name: `${ name }`,
+      email: `${ email }` } )
+      .then(res => {
+        console.log('res', res)
+        this.setState({ data: res.config })
+      })
   }
 
 
@@ -57,7 +65,7 @@ export class UserForm extends Component {
             justify="center"
             style={{ minHeight: '50vh' }}>
           <FormGroup style={styles.formGroup}>
-            <form action="/submit" onSubmit={this.handleSubmit} style={{ display: 'flex', flexDirection: 'column'} }>
+            <form onSubmit={this.handleSubmit} style={{ display: 'flex', flexDirection: 'column'} }>
             <FormControl margin="normal">
               <InputLabel htmlFor="my-input">Name</InputLabel>
               <Input id="my-input" aria-describedby="my-helper-text" required onChange={(e) => this.handleChange('name', e.target.value)} />
