@@ -15,7 +15,10 @@ const styles = {
     padding: '2rem'
   },
   headerStyles: {
-    padding: '0 2rem'
+    padding: '0 2rem',
+    textTransform: 'uppercase',
+    fontSize: '1rem',
+    margin: '0.7rem'
   }
 };
 export class UserForm extends Component {
@@ -56,7 +59,7 @@ export class UserForm extends Component {
             direction="column"
             justify="center"
             style={{ minHeight: '20vh' }}>
-              <h2 style={ styles.headerStyles }>Reactjs application with Material UI on Amazon AWS S3 to trigger Lambda Function</h2>
+              <h2 style={ styles.headerStyles }>Reactjs application with Material UI, AWS S3, API Gateway, Lambda and DynamoDB</h2>              
           </Grid>
         <Grid
             container
