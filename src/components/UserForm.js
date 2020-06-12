@@ -71,7 +71,13 @@ export class UserForm extends Component {
             style={{ minHeight: '50vh' }}>
           <FormGroup style={styles.formGroup}>
             <form onSubmit={this.handleSubmit} style={{ display: 'flex', flexDirection: 'column'} }>
-              { isSuccess === true ? 'Success' : '' }
+              { isSuccess === true ? 
+              <div style={{ 
+                border:' 2px dotted rgb(98, 181, 158)', 
+                padding: '1rem', 
+                color: 'rgb(98, 181, 158)' }}>Thank you, your message was sent successfully
+              </div> : '' 
+              }
             <FormControl margin="normal">
               <InputLabel htmlFor="my-input">Name</InputLabel>
               <Input id="my-input" aria-describedby="my-helper-text" required onChange={(e) => this.handleChange('name', e.target.value)} />
