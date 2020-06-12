@@ -28,6 +28,7 @@ export class UserForm extends Component {
       name: '',
       email: '',
       message: '',
+      isSuccess: false,
       data: {}
     };
   }
@@ -45,12 +46,13 @@ export class UserForm extends Component {
       email: `${ email }` } )
       .then(res => {
         console.log('res', res)
-        this.setState({ data: res.config })
+        this.setState({ data: res.config, isSuccess: true })
       })
   }
 
 
   render() {
+    const { isSuccess } = this.state;
     return (
       <Fragment>
           <Grid 
@@ -59,7 +61,7 @@ export class UserForm extends Component {
             direction="column"
             justify="center"
             style={{ minHeight: '20vh' }}>
-              <h2 style={ styles.headerStyles }>Reactjs application with Material UI, AWS S3, API Gateway, Lambda and DynamoDB</h2>              
+              <h2 style={ styles.headerStyles }>Reactjs application with Material UI, AWS S3, API Gateway, Lambda and DynamoDB</h2>            
           </Grid>
         <Grid
             container
@@ -69,6 +71,7 @@ export class UserForm extends Component {
             style={{ minHeight: '50vh' }}>
           <FormGroup style={styles.formGroup}>
             <form onSubmit={this.handleSubmit} style={{ display: 'flex', flexDirection: 'column'} }>
+              { isSuccess === true ? 'Success' : '' }
             <FormControl margin="normal">
               <InputLabel htmlFor="my-input">Name</InputLabel>
               <Input id="my-input" aria-describedby="my-helper-text" required onChange={(e) => this.handleChange('name', e.target.value)} />
