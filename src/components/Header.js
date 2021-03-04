@@ -12,9 +12,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
+  header: {
+    background: '#000'
+  }
 }));
 
 export default function Header() {
@@ -22,7 +22,7 @@ export default function Header() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default" style={{ padding: '1rem' }}>
+      <AppBar elevation={0} position="static" style={{ padding: '1rem' }} className={classes.header}>
         <Toolbar variant="dense">
           <Typography variant="h6" color="inherit">
             <Link to="/">
