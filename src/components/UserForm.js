@@ -110,7 +110,8 @@ export class UserForm extends Component {
                 fullWidth
                 color="primary"
                 className="submit-btn"
-              >Submit</Button>
+              >Submit <span class="material-icons" style={{ fontSize: '18px', marginLeft: '5px' }}>send</span>
+              </Button>
             </FormControl>
             </form>
           </FormGroup>         
