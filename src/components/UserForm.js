@@ -19,6 +19,11 @@ const styles = {
     textTransform: 'uppercase',
     fontSize: '1rem',
     margin: '0.7rem'
+  },
+  successMsg: {
+    padding: '1rem', 
+    background: 'rgb(98, 181, 158)',
+    fontWeight: 'bold'
   }
 };
 export class UserForm extends Component {
@@ -45,7 +50,6 @@ export class UserForm extends Component {
       name: `${ name }`,
       email: `${ email }` } )
       .then(res => {
-        console.log('res', res)
         this.setState({ data: res.config, isSuccess: true })
       })
   }
@@ -64,10 +68,7 @@ export class UserForm extends Component {
           <FormGroup style={styles.formGroup}>
             <form onSubmit={this.handleSubmit} style={{ display: 'flex', flexDirection: 'column'} }>
               { isSuccess === true ? 
-              <div style={{ 
-                border:' 2px dotted rgb(98, 181, 158)', 
-                padding: '1rem', 
-                color: 'rgb(98, 181, 158)' }}>Thank you, your message was sent successfully
+              <div style={styles.successMsg}>Thank you, your message was sent successfully
               </div> : '' 
               }
             <FormControl margin="normal">
