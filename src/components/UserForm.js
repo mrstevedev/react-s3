@@ -46,9 +46,9 @@ export class UserForm extends Component {
     e.preventDefault();
     const { message, name, email } = this.state;
     await axios.post(`${ config.api.invokeUrl }/submit`, 
-    { message: `${ message }`,
-      name: `${ name }`,
-      email: `${ email }` } )
+    { name: `${ name }`,
+      email: `${ email }`, 
+      message: `${ message }`, } )
       .then(res => {
         this.setState({ data: res.config, isSuccess: true })
       })
