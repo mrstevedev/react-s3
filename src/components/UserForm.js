@@ -23,7 +23,8 @@ const styles = {
   successMsg: {
     padding: '1rem', 
     background: 'rgb(98, 181, 158)',
-    fontWeight: 'bold'
+    fontWeight: '500',
+    color: '#fff'
   }
 };
 export class UserForm extends Component {
