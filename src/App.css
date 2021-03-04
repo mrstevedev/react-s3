@@ -10,3 +10,9 @@ body {
 .container {
   padding: 15px;
 }
+
+.submit-btn { 
+  background: #000 !important;
+  color: #fff !important;
+  text-transform: capitalize !important;
+}
