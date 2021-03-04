@@ -55,14 +55,6 @@ export class UserForm extends Component {
     const { isSuccess } = this.state;
     return (
       <Fragment>
-          <Grid 
-            container
-            spacing={0}
-            direction="column"
-            justify="center"
-            style={{ minHeight: '20vh' }}>
-              <h2 style={ styles.headerStyles }>Reactjs application with Material UI, AWS S3, API Gateway, Lambda and DynamoDB</h2>            
-          </Grid>
         <Grid
             container
             spacing={0}
