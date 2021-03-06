@@ -35,26 +35,51 @@ export class UserForm extends Component {
       email: '',
       message: '',
       isSuccess: false,
-      data: {}
+      data: {},
+      errorName: false,
+      errorEmail: false,
+      errorMessage: false
     };
   }
   
   handleChange = (field, value) => {
-    this.setState({ [field]: value })
-  }
+    this.setState({ [field]: value });
+    const { name, email, message } = this.state;
+    if(name !== '') {
+      this.setState({ errorName: false });
+    }
+    if(email !== '') {
+      this.setState({ errorEmail: false });
+    }
+    if(message !=='') {
+      this.setState({ errorMessage: false });
+    }
+   }
 
   handleSubmit = async (e) => {
     e.preventDefault();
     const { message, name, email } = this.state;
+
+    if(name === '') {
+      this.setState({ errorName: true });
+    }
+    if(email === '') {
+      this.setState({ errorEmail: true });
+    }
+    if(message === '') {
+      this.setState({ errorMessage: true });
+    } else {
+    
     await axios.post(`${ config.api.invokeUrl }/submit`, 
     { name: `${ name }`,
       email: `${ email }`, 
       message: `${ message }`, } )
       .then(res => {
+        console.log(res)
         this.setState({ data: res.config, isSuccess: true })
       })
+    }
   }
-
 
   render() {
     const { isSuccess } = this.state;
@@ -74,9 +99,16 @@ export class UserForm extends Component {
               }
             <FormControl margin="normal">
               <InputLabel htmlFor="my-input">Name</InputLabel>
-              <Input id="my-input" aria-describedby="my-helper-text" required onChange={(e) => this.handleChange('name', e.target.value)} />
+              <Input 
+                id="my-input" 
+                aria-describedby="my-helper-text" 
+                onChange={(e) => this.handleChange('name', e.target.value)} 
+                error={!!this.state.errorName}
+              />
               <FormHelperText id="my-helper-text">
-                Please enter your name.
+                { this.state.errorName ? (
+                  <span className="error-txt">Name is required</span>
+                ) : 'Please enter your name.' }
               </FormHelperText>
             </FormControl>
             <FormControl margin="normal">
@@ -85,11 +117,13 @@ export class UserForm extends Component {
                 type="email"
                 id="my-input" 
                 aria-describedby="my-helper-text" 
-                required
+                error={!!this.state.errorEmail}
                 onChange={(e) => this.handleChange('email', e.target.value)}
                 />
               <FormHelperText id="my-helper-text">
-                { "We'll never share your email." }
+                { this.state.errorEmail ? (
+                  <span className="error-txt">Email is required</span>
+                ) : "We'll never share your email." }
               </FormHelperText>
             </FormControl>
             <FormControl margin="normal">
@@ -98,10 +132,12 @@ export class UserForm extends Component {
                 id="my-input" 
                 aria-describedby="my-helper-text"
                 onChange={(e) => this.handleChange('message', e.target.value)} 
-                required
+                error={!!this.state.errorMessage}
                 />
               <FormHelperText id="my-helper-text">
-                {'What would you like to say'}
+                { this.state.errorMessage ? (
+                  <span className="error-txt">Message is required</span>
+                ) : 'What would you like to say' }
               </FormHelperText>
             </FormControl>
             <FormControl margin="normal">
