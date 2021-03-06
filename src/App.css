@@ -16,3 +16,7 @@ body {
   color: #fff !important;
   text-transform: capitalize !important;
 }
+
+.error-txt {
+  color: #f44336;
+}
