@@ -14,6 +14,11 @@ const styles = {
   formGroup: {
     padding: '2rem'
   },
+
+  form: {
+    display: 'flex', 
+    flexDirection: 'column'
+  },
   headerStyles: {
     padding: '0 2rem',
     textTransform: 'uppercase',
@@ -25,6 +30,10 @@ const styles = {
     background: 'rgb(98, 181, 158)',
     fontWeight: '500',
     color: '#fff'
+  },
+  sendIcon: {
+    fontSize: '18px', 
+    marginLeft: '5px'
   }
 };
 export class UserForm extends Component {
@@ -90,9 +99,9 @@ export class UserForm extends Component {
             spacing={0}
             direction="column"
             justify="center"
-            style={{ minHeight: '50vh' }}>
+            style={{ height: '50vh' }}>
           <FormGroup style={styles.formGroup}>
-            <form onSubmit={this.handleSubmit} style={{ display: 'flex', flexDirection: 'column'} }>
+            <form onSubmit={this.handleSubmit} style={ styles.form }>
               { isSuccess === true ? 
               <div style={styles.successMsg}>Thank you, your message was sent successfully
               </div> : '' 
@@ -146,7 +155,7 @@ export class UserForm extends Component {
                 fullWidth
                 color="primary"
                 className="submit-btn"
-              >Send Message <span className="material-icons" style={{ fontSize: '18px', marginLeft: '5px' }}>send</span>
+              >Send Message <span className="material-icons" style={ styles.sendIcon }>send</span>
               </Button>
             </FormControl>
             </form>
