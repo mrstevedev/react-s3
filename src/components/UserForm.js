@@ -114,8 +114,10 @@ export class UserForm extends Component {
                 error={!!this.state.errorName}
               />
               <FormHelperText id="my-helper-text">
-                { this.state.errorName ? (
+                { this.state.errorName === true ? (
                   <span className="error-txt">Name is required</span>
+                ) : this.state.name !== '' ? (
+                  <span className="success-txt">Nice</span>
                 ) : 'Please enter your name.' }
               </FormHelperText>
             </FormControl>
@@ -129,9 +131,11 @@ export class UserForm extends Component {
                 onChange={(e) => this.handleChange('email', e.target.value)}
                 />
               <FormHelperText id="my-helper-text">
-                { this.state.errorEmail ? (
+                { this.state.errorEmail === true ? (
                   <span className="error-txt">Email is required</span>
-                ) : "We'll never share your email." }
+                ) : this.state.email !== '' ? (
+                  <span className="success-txt">Nice</span>
+                ) : "Please enter your email." }
               </FormHelperText>
             </FormControl>
             <FormControl margin="normal">
@@ -143,9 +147,11 @@ export class UserForm extends Component {
                 error={!!this.state.errorMessage}
                 />
               <FormHelperText id="my-helper-text">
-                { this.state.errorMessage ? (
+                { this.state.errorMessage === true ? (
                   <span className="error-txt">Message is required</span>
-                ) : 'What would you like to say' }
+                ) : this.state.message !== '' ? (
+                  <span className="success-txt">Nice</span>
+                ) : 'Please enter your message.' }
               </FormHelperText>
             </FormControl>
             <FormControl margin="normal">
