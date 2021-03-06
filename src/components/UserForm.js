@@ -9,6 +9,7 @@ import { Grid } from "@material-ui/core";
 import { withStyles } from '@material-ui/core/styles';
 import config from '../config.json';
 import axios from 'axios';
+import { validateEmail } from '../util/validate';
 
 const styles = {
   formGroup: {
@@ -89,11 +90,6 @@ export class UserForm extends Component {
     }
   }
 
-  validateEmail(email) {
-    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return regex.test(email);
-  }
-
   render() {
     const { isSuccess } = this.state;
     return (
@@ -138,7 +134,7 @@ export class UserForm extends Component {
               <FormHelperText id="my-helper-text">
                 { this.state.errorEmail === true ? (
                   <span className="error-txt">Email is required</span>
-                ) : this.state.email !== '' && this.validateEmail(this.state.email) ? (
+                ) : this.state.email !== '' && validateEmail(this.state.email) ? (
                   <span className="success-txt">You successully entered your email</span>
                 ) : "Please enter your email." }
               </FormHelperText>
