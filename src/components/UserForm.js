@@ -84,7 +84,6 @@ export class UserForm extends Component {
       email: `${ email }`, 
       message: `${ message }`, } )
       .then(res => {
-        console.log(res)
         this.setState({ data: res.config, isSuccess: true })
       })
     }
