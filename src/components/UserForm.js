@@ -89,6 +89,11 @@ export class UserForm extends Component {
     }
   }
 
+  validateEmail(email) {
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(email);
+  }
+
   render() {
     const { isSuccess } = this.state;
     return (
@@ -117,7 +122,7 @@ export class UserForm extends Component {
                 { this.state.errorName === true ? (
                   <span className="error-txt">Name is required</span>
                 ) : this.state.name !== '' ? (
-                  <span className="success-txt">Nice</span>
+                  <span className="success-txt">You successully entered your name</span>
                 ) : 'Please enter your name.' }
               </FormHelperText>
             </FormControl>
@@ -133,8 +138,8 @@ export class UserForm extends Component {
               <FormHelperText id="my-helper-text">
                 { this.state.errorEmail === true ? (
                   <span className="error-txt">Email is required</span>
-                ) : this.state.email !== '' ? (
-                  <span className="success-txt">Nice</span>
+                ) : this.state.email !== '' && this.validateEmail(this.state.email) ? (
+                  <span className="success-txt">You successully entered your email</span>
                 ) : "Please enter your email." }
               </FormHelperText>
             </FormControl>
@@ -150,7 +155,7 @@ export class UserForm extends Component {
                 { this.state.errorMessage === true ? (
                   <span className="error-txt">Message is required</span>
                 ) : this.state.message !== '' ? (
-                  <span className="success-txt">Nice</span>
+                  <span className="success-txt">You successully entered your message</span>
                 ) : 'Please enter your message.' }
               </FormHelperText>
             </FormControl>
