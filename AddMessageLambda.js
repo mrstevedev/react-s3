@@ -2,7 +2,7 @@ const AWS = require('aws-sdk');
 const documentClient = new AWS.DynamoDB.DocumentClient();
 const SES = new AWS.SES({region: 'us-west-2'});
 
-exports.handler = async (event, context, cb) => {
+exports.handler = async (event) => {
     const reqBody = JSON.parse(event.body);
     
     const htmlBody = `
@@ -11,7 +11,6 @@ exports.handler = async (event, context, cb) => {
       <head>
       </head>
       <body>
-        <p>Hi, thank you for your registeration at http://mkdecision-react-form.s3-website-us-west-1.amazonaws.com/</p>
         <p>Name: ${reqBody.name}</p>
         <p>Email: ${reqBody.email}</p>
         <p>Message: ${reqBody.message}</p>
@@ -19,14 +18,9 @@ exports.handler = async (event, context, cb) => {
     </html>
   `;
 
-  const textBody = `
-    Hi ${reqBody.name},
-    ...
-  `;
-  // Create sendEmail params
   const emailParams = {
     Destination: {
-      ToAddresses: [reqBody.email]
+      ToAddresses: [`${reqBody.email}`]
     },
     Message: {
       Body: {
@@ -36,7 +30,7 @@ exports.handler = async (event, context, cb) => {
         },
         Text: {
           Charset: "UTF-8",
-          Data: textBody
+          Data: 'MK Message'
         }
       },
       Subject: {
@@ -44,7 +38,7 @@ exports.handler = async (event, context, cb) => {
         Data: "Thank you for registering with MKDecision!"
       }
     },
-    Source: "Admin from MK <stevendotpulido@gmail.com>"
+    Source: `${reqBody.name} <stevendotpulido@gmail.com>`
   };
     const params = {
         TableName: 'messages',
@@ -62,7 +56,4 @@ exports.handler = async (event, context, cb) => {
     } catch(err) {
         console.log(err)
     }
-    
-     // Create the promise and SES service object
-    const sendPromise = new AWS.SES({ apiVersion: "2010-12-01" })
 };
