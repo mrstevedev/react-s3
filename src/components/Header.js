@@ -44,7 +44,7 @@ export default function Header() {
         <Toolbar variant="dense">
           <Typography variant="h6" color="inherit">
             <Link to="/" className={ classes.logoLink }>
-              <img className={ classes.logo } src={logo} alt="MK Decision Reactjs Form" />
+              <img className={ `${ classes.logo } fade-in` } src={logo} alt="MK Decision Reactjs Form" />
             </Link>
           </Typography>
         </Toolbar>
