@@ -51,7 +51,6 @@ export class UserForm extends Component {
       name: '',
       email: '',
       message: '',
-      isSuccess: false,
       data: {},
       errorName: false,
       errorEmail: false,
@@ -93,13 +92,12 @@ export class UserForm extends Component {
       email: `${ email }`, 
       message: `${ message }`, } )
       .then(res => {
-        this.setState({ data: res.config, isSuccess: true, open: true })
+        this.setState({ data: res.config, open: true })
       })
     }
   }
 
   render() {
-    // const { isSuccess } = this.state;
     return (
       <Fragment>
         <Grid
@@ -110,10 +108,6 @@ export class UserForm extends Component {
             style={{ height: '50vh' }}>
           <FormGroup style={styles.formGroup}>
             <form onSubmit={this.handleSubmit} style={ styles.form }>
-              {/* { isSuccess === true ? 
-              <div style={styles.successMsg}>Thank you, your message was sent successfully
-              </div> : '' 
-              } */}
             <FormControl margin="normal">
               <InputLabel htmlFor="my-input">Name</InputLabel>
               <Input 
