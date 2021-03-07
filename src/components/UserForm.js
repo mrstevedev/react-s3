@@ -181,7 +181,7 @@ export class UserForm extends Component {
             horizontal: 'center',
           }}
           open={this.state.open}
-          // autoHideDuration={4000}
+          autoHideDuration={4000}
           message={(
             <div style={ styles.infoWrapper }>
               <span className='material-icons'>check_circle</span>
