@@ -1,9 +1,5 @@
 # MK Decision Engineering Challenge
 
-:rotating_light: Please provide me with an email address beforehand in order for me to add it onto AWS
-as a verified address. This is needed to invoke AWS' SES service on form submit. 
-See **Notes** section below.
-
 This challenge was built using
 1. React JS
     * [Axios](https://github.com/axios/axios): Promise based HTTP client for the browser and node.js
