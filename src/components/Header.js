@@ -13,10 +13,21 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   header: {
-    background: '#000'
+    background: '#000',
+    padding: '1rem',
+    '@media(max-width: 545px)': {
+      padding: '5rem'
+    } 
   },
   logo: {
-    width: '100px'
+    width: '100px',
+    '@media(max-width: 545px)': {
+      width: '100%',
+      margin: '0 1.8rem'
+    },
+    '@media(max-width: 345px)': {
+      margin: '0'
+    }
   },
   logoLink: {
     display: 'flex',
@@ -29,7 +40,7 @@ export default function Header() {
 
   return (
     <div className={classes.root}>
-      <AppBar elevation={0} position="static" style={{ padding: '1rem' }} className={classes.header}>
+      <AppBar elevation={0} position="static" className={classes.header}>
         <Toolbar variant="dense">
           <Typography variant="h6" color="inherit">
             <Link to="/" className={ classes.logoLink }>
