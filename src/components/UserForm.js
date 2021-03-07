@@ -10,6 +10,8 @@ import { withStyles } from '@material-ui/core/styles';
 import config from '../config.json';
 import axios from 'axios';
 import { validateEmail } from '../util/validate';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
 
 const styles = {
   formGroup: {
@@ -27,14 +29,19 @@ const styles = {
     margin: '0.7rem'
   },
   successMsg: {
-    padding: '1rem', 
-    background: 'rgb(98, 181, 158)',
-    fontWeight: '500',
-    color: '#fff'
+    fontWeight: 'bold',
+    margin: '0 0.5rem'
   },
   sendIcon: {
     fontSize: '18px', 
     marginLeft: '5px'
+  },
+  close: {
+    padding: '0.5px'
+  },
+  infoWrapper: {
+    display: 'flex',
+    alignItems: 'center'
   }
 };
 export class UserForm extends Component {
@@ -48,7 +55,8 @@ export class UserForm extends Component {
       data: {},
       errorName: false,
       errorEmail: false,
-      errorMessage: false
+      errorMessage: false,
+      open: false
     };
   }
   
@@ -85,13 +93,13 @@ export class UserForm extends Component {
       email: `${ email }`, 
       message: `${ message }`, } )
       .then(res => {
-        this.setState({ data: res.config, isSuccess: true })
+        this.setState({ data: res.config, isSuccess: true, open: true })
       })
     }
   }
 
   render() {
-    const { isSuccess } = this.state;
+    // const { isSuccess } = this.state;
     return (
       <Fragment>
         <Grid
@@ -102,10 +110,10 @@ export class UserForm extends Component {
             style={{ height: '50vh' }}>
           <FormGroup style={styles.formGroup}>
             <form onSubmit={this.handleSubmit} style={ styles.form }>
-              { isSuccess === true ? 
+              {/* { isSuccess === true ? 
               <div style={styles.successMsg}>Thank you, your message was sent successfully
               </div> : '' 
-              }
+              } */}
             <FormControl margin="normal">
               <InputLabel htmlFor="my-input">Name</InputLabel>
               <Input 
@@ -165,7 +173,34 @@ export class UserForm extends Component {
               </Button>
             </FormControl>
             </form>
-          </FormGroup>         
+          </FormGroup>   
+
+          <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          open={this.state.open}
+          // autoHideDuration={4000}
+          message={(
+            <div style={ styles.infoWrapper }>
+              <span className='material-icons'>check_circle</span>
+              <span style={ styles.successMsg }>Message sent successfully</span>
+            </div>
+          )}
+          onClose={() => this.setState({open: false})}
+          action={
+            <React.Fragment>
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                onClick={() => this.setState({ open: false })}
+              >
+                <span className="material-icons">close</span>
+              </IconButton>
+            </React.Fragment>
+          }
+      />      
         </Grid>
       </Fragment>
     );
