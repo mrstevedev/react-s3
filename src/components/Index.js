@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import UserForm from '../components/UserForm';
+import UserForm from './ContactForm';
 
 class Index extends Component {
     render() {
