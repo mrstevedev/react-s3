@@ -2,9 +2,9 @@
 
 This challenge was built using
 1. React JS
-    * [Axios](https://github.com/axios/axios): Promise based HTTP client for the browser and node.js
-2. Material UI
-3. AWS
+2. [Axios](https://github.com/axios/axios): Promise based HTTP client for the browser and node.js
+4. Material UI
+5. AWS
     * S3
     * API Gateway
     * Lambda
