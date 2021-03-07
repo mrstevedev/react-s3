@@ -14,6 +14,13 @@ const useStyles = makeStyles(theme => ({
   },
   header: {
     background: '#000'
+  },
+  logo: {
+    width: '100px'
+  },
+  logoLink: {
+    display: 'flex',
+    alignItems: 'center'
   }
 }));
 
@@ -25,8 +32,8 @@ export default function Header() {
       <AppBar elevation={0} position="static" style={{ padding: '1rem' }} className={classes.header}>
         <Toolbar variant="dense">
           <Typography variant="h6" color="inherit">
-            <Link to="/">
-              <img src={logo} alt="MK Decision Reactjs Form" />
+            <Link to="/" className={ classes.logoLink }>
+              <img className={ classes.logo } src={logo} alt="MK Decision Reactjs Form" />
             </Link>
           </Typography>
         </Toolbar>
